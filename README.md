@@ -1,12 +1,12 @@
 # Unique-user-kafka-consumer
 Read json messages/frames from Kafka to identify the number of unique users. uid is user ID field in the JSON message/frame.
 
-How to run:
+How to run on Linux:
 -
 1. Clone this repository.
-2. Kafka must be installed. Version 2.4 was used. Download the binary from https://kafka.apache.org/downloads and unzip it into the repository forlder.
-3. Run setup.sh script. This will start the kafka server. create and configure a topic.  with "*mvn exec:java*"
-5. Input data into topic. This can be done with the kafka console producer in the kafka/bin folder *./kafka-console-producer.sh --broker-list localhost:9092 --topic test < ../../stream.jsonl*. Stream.jsonl is the test data provided. The number of frames per minute will be output by the app.
+2. Kafka must be installed. Version 2.4 was used. Download the binary from https://kafka.apache.org/downloads and unzip it into the repository folder. To do this run *wget https://www-eu.apache.org/dist/kafka/2.4.0/kafka_2.13-2.4.0.tgz* followed by *tar -zxvf kafka_2.13-2.4.0.tgz*.
+3. Run setup.sh script with *./setup.sh*. This will start the kafka server, configure a topic and start the app.
+5. Open a new console window to input valid json data into topic. This can be done with the kafka console producer in the kafka/bin folder. Run *./kafka-console-producer.sh --broker-list localhost:9092 --topic test < ../../stream.jsonl*. Stream.jsonl is the test data retrieved from *http://tx.tamedia.ch.s3.amazonaws.com/challenge/data/stream.jsonl.gz:* after it has been unzipped. The number of frames per minute will be output by the app.
 
 How I did it?
 -
@@ -14,7 +14,7 @@ How I did it?
 - Convert the frame into a JSON java object and extract ts and uid fields. JSON object is only parsed once per frame to improve performance.
 - The uid of each frame is added to a Set. A set does not allow duplicates and this is ideal for our goal and we don't have to write code to check if it is a duplicate (Required with an arraylist). At the end of each minute the size of the set gives us the number of unique users in that minute.
 - The start timestamp is recorded and used to output the frame count. The start timestamp is then updated to the next minute.
-- The output provides the no. of frames for that minute. Some performance metrics such as time taken to count 1 minutes worth of data  and average no. of frames counted per second are in the output.
+- The output provides the no. of frames for that minute. Some performance metrics such as time taken to count 1 minutes worth of data and average no. of frames counted per second are in the output.
 - It was implemented it this way because getting a working prototype first was important before trying to achieve more difficult requirements. Outputting the result after a minute of frames was the simplest form. 
 
 Given more time I would...
