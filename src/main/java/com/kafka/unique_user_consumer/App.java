@@ -55,11 +55,12 @@ public class App {
 		try {
 			System.out.println("Reading from Kafka topic " + TOPIC);
 			while (true) {
+				// Poll the topic to retrieve new messages
 				ConsumerRecords<Long, String> consumerRecords = consumer.poll(Duration.ofMillis(1000));
 
 				Iterator<ConsumerRecord<Long, String>> a = consumerRecords.iterator();
 				while (a.hasNext()) {
-
+					
 					ConsumerRecord<Long, String> record = a.next();
 					Gson h = new Gson();
 					JsonObject json = h.fromJson(record.value(), JsonObject.class);
@@ -82,7 +83,7 @@ public class App {
 						System.out.print("Duration for " + userSet.size() + " frames: ");
 						System.out.println(endTime - startTime);
 						System.out.print("Average frames per second: ");
-						System.out.println(userSet.size() / 60);
+						System.out.println(userSet.size() / INTERVAL);
 						startTime = endTime;
 
 						startTimestamp = startTimestamp + INTERVAL;
