@@ -1,4 +1,4 @@
-package com.kafka.unique_user_consumer;
+package com.kafka.unique_user_kafka_consumer;
 
 import java.time.Duration;
 import java.util.Collections;

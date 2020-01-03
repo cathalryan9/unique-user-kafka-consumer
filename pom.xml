@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.kafka</groupId>
-	<artifactId>unique-user-consumer</artifactId>
+	<artifactId>unique-user-kafka-consumer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>unique-user-consumer</name>
+	<name>unique-user-kafka-consumer</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -43,7 +43,7 @@
 					</execution>
 				</executions>
 				<configuration>
-					<mainClass>com.kafka.unique_user_consumer.App</mainClass>
+					<mainClass>com.kafka.unique_user_kafka_consumer.App</mainClass>
 				</configuration>
 			</plugin>
 

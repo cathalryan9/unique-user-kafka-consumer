@@ -6,4 +6,4 @@ sudo apt-get install maven
 # Start app
 mvn exec:java
 # Input data
-./kafka_2.*/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic cathalryantest < ../stream.jsonl
+#./kafka_2.*/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic cathalryantest < ../stream.jsonl
